@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Trackers</title>
+    <style>
+      body {
+        width: 243px;
+        overflow-x: hidden;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+      #entireBody {
+        background-color:#EEE;
+        border: 1px solid #DDD;
+        padding:10px;
+        padding-bottom:0px;
+      }
+      .header {
+        color:#555;
+        padding:5px 5px;
+      }
+      #info {
+        border: 1px solid #DDD;
+      }
+      #info .header {
+        padding:5px 5px;
+        text-transform: uppercase;
+        font-size:15px;
+        background-color:#248aff;
+        color:#f7f7f7;
+      }
+      #totalLatency {
+        background-color:#FCFCFC;
+        padding:20px;
+        text-align:center;
+      }
+      #totalLatency #domainName {
+        font-size:20px;
+      }
+      #totalLatency #latencyNum {
+        font-size:35px;
+      }
+
+      #totalLatency.disabled {
+        background-color:#f0f0f0;
+        opacity:0.8;
+      }
+      .trackerCell {
+        padding: 14px 10px;
+        font-size: 16px;
+        background-color:#FCFCFC;
+        border-bottom: 1px dotted #333;
+        color:#555;
+        box-shadow: inset 0px -8px 41px rgba(240,240,240,0.3);
+        cursor:pointer;
+      }
+      .trackerCell:last-child {
+        border-bottom:none;
+      }
+      .trackerCell:hover {
+        background-color:#FFFFE5;
+      }
+      .trackerCell .trackerData {
+        display:inline-block;
+        vertical-align:middle;
+      }
+      .trackerCell .trackerLatency {
+        float:right;
+      }
+      .trackerCell .trackerInfo {
+        background-color: #555;
+        color: #fcfcfc;
+        border-radius: 10px;
+        box-shadow: inset 0px 0px 7px #000;
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 11px;
+        display:none;
+      }
+      #footer {
+        font-size: 10px;
+        color: #555;
+        padding: 7px 5px;
+        text-align: right;
+      }
+    </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/ich.js"></script>
+    <script src="js/popup.js"></script>
+    <script id="tracker" type="text/html">
+      <div class="trackerCell">
+        <div class="trackerHeader">
+          <div class="trackerName trackerData">{{Name}}</div>
+          <div class="trackerLatency trackerData">{{Latency}}</div>
+        </div>
+        <div class="trackerInfo">
+            {{Description}}
+        </div>
+      </div>
+    </script>
+  </head>
+  <body>
+    <div id="entireBody">
+      <div class="header">Surf the Web. Save Time.</div>
+      <div id="info">
+        <div>
+          <div class="header">Total Latency Gain</div>
+          <div id="totalLatency">
+            <div id="domainName">NYTimes</div>
+            <div id="latencyNum">851 ms</div>
+          </div>
+        </div>
+        <div>
+          <div class="header">Tracker List</div>
+          <div id="target"></div>
+        </div>
+      </div>
+      <div id="footer">
+        Falcon. Surf The Web. Save Time. (c)
+      </div>
+    </div>
+  </body>
+</html>
+

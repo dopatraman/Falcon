@@ -1,0 +1,11 @@
+{
+	"manifest_version": 2,
+	"name": "Falcon",
+	"description": "Performance improvement layer on top of Ghostery",
+	"version": "1.0",
+	"browser_action": {
+		"default_icon": "images/icon.png",
+		"default_popup": "popup.html"
+	},
+	"permissions":[]
+}
