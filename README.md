@@ -10,3 +10,5 @@ TODO
 - Fetch real data from db
 - Put permissions into manifest for cross domain requests
 - Fix jump in tracker description bubble
+
+Developed by Prakash Venkat, Avi Das, and Matthew Zadrozny
