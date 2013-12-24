@@ -19,9 +19,9 @@ Tracker.prototype.createTemplateObj = function(data) {
   var lat = data.Latency;
   var desc = data.Description;
   var obj = {
-    Name: name,
-    Latency: lat + " ms",
-    Description: desc
+    name: name,
+    latency: lat + " ms",
+    description: desc
   }
 
   return obj;
@@ -106,13 +106,19 @@ TrackerController.prototype.fetchTrackers = function(domain, callback) {
     console.log(err);
   }
 }
-TrackerController.prototype.populateTrackers = function(trackerDataList, target) {
+TrackerController.prototype.populateTrackers = function(trackerObj, target) {
+  var trackerDataList = trackerObj.trackers;
   if (trackerDataList instanceof Array) {
     var trackerTarget = $(target);
     for (var i = 0; i < trackerDataList.length; i++) {
       var tracker = new Tracker(trackerDataList[i], trackerTarget).init();
       this.list.push(tracker);
     }
+  }
+  
+  if (trackerObj.aggregate !== undefined) {
+      $("#domainName").text(trackerObj.aggregate.Name);
+      $("#totalLatency").text(trackerObj.aggregate.Latency);
   }
 }
 
@@ -124,45 +130,37 @@ TrackerNS["Controller"] = new TrackerController();
 
 var testObjs = [
   {
-    Name: "Brightcove",
-    Latency: 329,
+    name: "Brightcove",
+    domain: "www.brightcove.com",
+    latency: 329,
     Description:"Brightcove is the leading online video hosting platform and online video player solution."
   },
   {
-    Name: "Webtrends",
-    Latency:189,
-    Description:"Webtrends provides web, social, and mobile analytics and other software solutions related to marketing intelligence."
+    name: "Webtrends",
+    domain: "www.webtrends.com",
+    latency:189,
+    description:"Webtrends provides web, social, and mobile analytics and other software solutions related to marketing intelligence."
   },
   {
-    Name: "Typekit",
-    Latency:333,
-    Description:"Typekit is a service which allows subscribers to embed fonts into online documents."
-  },
-  /*{
-    Name:"AppNexus",
-    Latency:249,
-    Description:"AppNexus is a New York City-based company that provides a platform specializing in real-time online advertising."
-  },
-  {
-    Name:"Moat",
-    Latency:1415,
-    Description:"Moat is a free search engine for display ads. Moat also offers heatmap analytics and resources for creative."
-  },
-  {
-    Name: "DataLogix",
-    Latency:104,
-    Description:"Datalogix is the big data company connecting digital advertising to offline sales."
-  },
-  {
-    Name: "ChartBeat",
-    Latency:87,
-    Description:"Chartbeat is a betaworks company that provides realtime analytics to Websites and blogs. It shows visitors, load times, and referring."
-  }*/
+    name: "Typekit",
+    domain: "www.typekit.com",
+    latency:333,
+    description:"Typekit is a service which allows subscribers to embed fonts into online documents."
+  }
 ];
+
+var testTrackerObj = {
+    aggregate: {
+        name: "New York Times",
+        domain: "www.nytimes.com",
+        latency: 100
+    },
+    trackers: testObjs
+}
 
 $(document).ready(function() {
   try {
-    TrackerNS.Controller.populateTrackers(testObjs, "#target");  
+    TrackerNS.Controller.populateTrackers(testTrackerObj, "#target");  
   }
   catch(err) {
     console.log(err);
