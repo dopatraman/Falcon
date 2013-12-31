@@ -76,15 +76,22 @@ TrackerController.prototype.formUrl = function(domain) {
 }
 TrackerController.prototype.fetchTrackers = function(domain, callback) {
   var completeUrl = this.formUrl(domain);
-  /*
+  
   var req = new XMLHttpRequest();
   req.open("GET", completeUrl, true);
-  req.onload = callback.bind(this);
+  //req.onload = callback.bind(this);
+  var rh = function(req) {
+      if (req.readyState == 4) {
+        callback.bind(this, req);
+      }
+  }
+  req.onreadystatechange = rh.bind(this, req);
   req.onerror = function() {
     console.log("Oops! An error occurred.");
   }
   req.send();
-  */
+  
+  /*
   try {
     $.ajax({
       url: completeUrl,
@@ -105,6 +112,7 @@ TrackerController.prototype.fetchTrackers = function(domain, callback) {
   catch(err) {
     console.log(err);
   }
+  */
 }
 TrackerController.prototype.populateTrackers = function(trackerObj, target) {
   var trackerDataList = trackerObj.trackers;
